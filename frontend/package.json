@@ -1,7 +1,7 @@
 {
   "name": "frontend",
   "version": "0.1.0",
-  "proxy": "https://rahatikcozum-emylzr1b8-ardcodings-projects.vercel.app/api/",
+  "proxy": "https://rahatikcozum-qzgj5k16d-ardcodings-projects.vercel.app",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.14.0",
