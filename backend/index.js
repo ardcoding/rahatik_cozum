@@ -11,7 +11,7 @@ const PORT = 5000;
 
 app.use(cors({
   origin: 'https://rahatik-cozum.vercel.app/',
-  credentials: true
+  credentials: false
 }));
 app.use(bodyParser.json());
 app.get('/', (_, res) => res.send('API çalışıyor'));
