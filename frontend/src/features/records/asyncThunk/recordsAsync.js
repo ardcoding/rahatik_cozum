@@ -5,7 +5,7 @@ export const fetchRecords = createAsyncThunk(
   'records/fetchRecords',
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get('https://rahatikcozum-qzgj5k16d-ardcodings-projects.vercel.app/api/records');
+      const response = await axios.get('/api/records');
       console.log(response.data)
       return response.data;
     } catch (error) {

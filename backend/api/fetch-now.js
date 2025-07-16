@@ -1,7 +1,10 @@
+import cors from "../helpers/cors.js";
 import { upsertRecord } from "../models/recordModel.js";
 import { fetchData } from "../services/dataService.js";
 
-export default async function handler(req, res) {
+export default async function fetchNowHandler(req, res) {
+  await cors(req, res);
+
   if (req.method !== 'GET') {
     return res.status(405).json({ error: 'GET isteği gönderilmedi.' });
   }

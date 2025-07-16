@@ -1,6 +1,9 @@
 import pool from '../db.js';
+import cors from '../helpers/cors.js';
 
-export default async function handler(req, res) {
+export default async function recordHandler(req, res) {
+  await cors(req, res);
+
   if (req.method !== 'GET') {
     return res.status(405).json({ error: 'GET isteği gönderilmedi' });
   }
