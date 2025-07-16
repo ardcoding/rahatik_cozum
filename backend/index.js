@@ -10,7 +10,7 @@ const app = express();
 const PORT = 5000;
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'https://rahatik-cozum.vercel.app/',
   credentials: true
 }));
 app.use(bodyParser.json());
