@@ -1,6 +1,7 @@
-import pool from '../db.js';
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
 
-export async function upsertRecord(record) {
+export async function upsertRecord(records) {
   const {
     id,
     hesap_kodu,
@@ -19,58 +20,61 @@ export async function upsertRecord(record) {
     bakiye_sekli,
     aktif,
     dovizkod
-  } = record;
+  } = records;
 
-  const safeNumber = val => (val === '' || val === null ? 0 : val);
+  const safeFloat = val => {
+    const num = parseFloat(val);
+    return isNaN(num) ? null : num;
+  };
 
-  const query = `
-    INSERT INTO records (
-      id, hesap_kodu, hesap_adi, tipi, ust_hesap_id,
-      borc, alacak, borc_sistem, alacak_sistem,
-      borc_doviz, alacak_doviz, borc_islem_doviz, alacak_islem_doviz,
-      birim_adi, bakiye_sekli, aktif, dovizkod
-    ) VALUES (
-      $1, $2, $3, $4, $5,
-      $6, $7, $8, $9,
-      $10, $11, $12, $13,
-      $14, $15, $16, $17
-    )
-    ON CONFLICT (id) DO UPDATE SET
-      hesap_kodu = EXCLUDED.hesap_kodu,
-      hesap_adi = EXCLUDED.hesap_adi,
-      tipi = EXCLUDED.tipi,
-      ust_hesap_id = EXCLUDED.ust_hesap_id,
-      borc = EXCLUDED.borc,
-      alacak = EXCLUDED.alacak,
-      borc_sistem = EXCLUDED.borc_sistem,
-      alacak_sistem = EXCLUDED.alacak_sistem,
-      borc_doviz = EXCLUDED.borc_doviz,
-      alacak_doviz = EXCLUDED.alacak_doviz,
-      borc_islem_doviz = EXCLUDED.borc_islem_doviz,
-      alacak_islem_doviz = EXCLUDED.alacak_islem_doviz,
-      birim_adi = EXCLUDED.birim_adi,
-      bakiye_sekli = EXCLUDED.bakiye_sekli,
-      aktif = EXCLUDED.aktif,
-      dovizkod = EXCLUDED.dovizkod
-  `;
+  const safeInt = val => {
+    const num = parseInt(val);
+    return isNaN(num) ? null : num;
+  };
 
-  await pool.query(query, [
-    id,
-    hesap_kodu,
-    hesap_adi,
-    tipi,
-    ust_hesap_id,
-    safeNumber(borc),
-    safeNumber(alacak),
-    safeNumber(borc_sistem),
-    safeNumber(alacak_sistem),
-    safeNumber(borc_doviz),
-    safeNumber(alacak_doviz),
-    safeNumber(borc_islem_doviz),
-    safeNumber(alacak_islem_doviz),
-    birim_adi,
-    bakiye_sekli,
-    aktif,
-    dovizkod
-  ]);
+  try {
+    return await prisma.records.upsert({
+      where: { id: Number(id) },
+      update: {
+        hesap_kodu: hesap_kodu || null,
+        hesap_adi: hesap_adi || null,
+        tipi: tipi || null,
+        ust_hesap_id: safeInt(ust_hesap_id),
+        borc: safeFloat(borc),
+        alacak: safeFloat(alacak),
+        borc_sistem: safeFloat(borc_sistem),
+        alacak_sistem: safeFloat(alacak_sistem),
+        borc_doviz: safeFloat(borc_doviz),
+        alacak_doviz: safeFloat(alacak_doviz),
+        borc_islem_doviz: safeFloat(borc_islem_doviz),
+        alacak_islem_doviz: safeFloat(alacak_islem_doviz),
+        birim_adi: birim_adi || null,
+        bakiye_sekli: safeInt(bakiye_sekli),
+        aktif: safeInt(aktif),
+        dovizkod: safeInt(dovizkod)
+      },
+      create: {
+        id: Number(id),
+        hesap_kodu: hesap_kodu || null,
+        hesap_adi: hesap_adi || null,
+        tipi: tipi || null,
+        ust_hesap_id: safeInt(ust_hesap_id),
+        borc: safeFloat(borc),
+        alacak: safeFloat(alacak),
+        borc_sistem: safeFloat(borc_sistem),
+        alacak_sistem: safeFloat(alacak_sistem),
+        borc_doviz: safeFloat(borc_doviz),
+        alacak_doviz: safeFloat(alacak_doviz),
+        borc_islem_doviz: safeFloat(borc_islem_doviz),
+        alacak_islem_doviz: safeFloat(alacak_islem_doviz),
+        birim_adi: birim_adi || null,
+        bakiye_sekli: safeInt(bakiye_sekli),
+        aktif: safeInt(aktif),
+        dovizkod: safeInt(dovizkod)
+      }
+    });
+  } catch (error) {
+    console.error('Prisma upsert error:', error);
+    throw error;
+  }
 }

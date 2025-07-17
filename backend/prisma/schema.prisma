@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model records {
+  id                 Int     @id @unique(map: "records_id_unique")
+  hesap_kodu         String?
+  hesap_adi          String?
+  tipi               String?
+  ust_hesap_id       Int?
+  borc               Float?
+  alacak             Float?
+  borc_sistem        Float?
+  alacak_sistem      Float?
+  borc_doviz         Float?
+  alacak_doviz       Float?
+  borc_islem_doviz   Float?
+  alacak_islem_doviz Float?
+  birim_adi          String?
+  bakiye_sekli       Int?
+  aktif              Int?
+  dovizkod           Int?
+}

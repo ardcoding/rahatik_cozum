@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 const httpsAgent = new https.Agent({  
   rejectUnauthorized: false
 });
-dotenv.config({path:"../config/.env"});
+dotenv.config({path:"./.env"});
 
 export async function getToken() {
   const url = 'https://efatura.etrsoft.com/fmi/data/v1/databases/testdb/sessions';
