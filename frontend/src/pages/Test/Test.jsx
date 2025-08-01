@@ -34,7 +34,7 @@ const Test = () => {
     <input type="hidden" name="user_phone" value="05554443322"/>
     <input type="hidden" name="user_basket" value={'[[\"\Ür\ün 1\",\"100.00\",1],[\"\Ür\ün 2\",\"200.00\",2]]'}/>
     <input type="hidden" name="debug_on" value="1"/>
-    <input type="hidden" name="paytr_token" value="9RKp51l6cS2PbjsnT5Tphx3XpBYJadruJ+Oq3fKTFJM=" />
+    <input type="hidden" name="paytr_token" value="aWqYWUwp0LX5H5wtiLW5BhFS+txNd0aWcNraPI/BTbA=" />
     <input type="hidden" name="non3d_test_failed" value="0"/>
     <input type="hidden" name="installment_count" value="0"/>
     <input type="hidden" name="no_installment" value="1"/>
