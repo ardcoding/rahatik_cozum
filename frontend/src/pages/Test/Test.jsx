@@ -1,6 +1,13 @@
 import React from 'react'
 
 const Test = () => {
+    fetch('https://api.ipify.org?format=json')
+  .then(response => response.json())
+  .then(data => {
+    console.log('Kullanıcının IP adresi:', data.ip);
+    // Bu IP'yi backend'e gönderebilirsin
+  });
+
   return (
         <form className="bg-red-400" action="https://www.paytr.com/odeme" method="post">
     Kart Sahibi Adı: <input type="text" name="cc_owner" value="TEST KARTI"/><br/>
