@@ -19,7 +19,7 @@ const Test = () => {
     <input type="hidden" name="merchant_id" value="601755"/>
     <input type="hidden" name="merchant_salt" value="H2x7K2ufqTMr63yZ"/>
     <input type="hidden" name="merchant_key" value="e8hTPsnJCpNn4wj2"/>
-    <input type="hidden" name="user_ip" value="2a02:e0:822b:2300:8c58:1448:cfc8:b354"/>
+    <input type="hidden" name="user_ip" value="176.42.143.74"/>
     <input type="hidden" name="merchant_oid" value="ORDER123456"/>
     <input type="hidden" name="email" value="info@siteniz.com"/>
     <input type="hidden" name="payment_type" value="card"/>
